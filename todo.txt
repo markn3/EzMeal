@@ -1,0 +1,13 @@
+Real basic program
+
+ui later
+
+menu class - print out menu etc...
+recipe class - has information on recipes
+main class - to run the program
+user clss - potential signing up and log in for users for saved preferences
+
+data bases for recipes could be in txt files...
+
+
+myfridgefood.com
