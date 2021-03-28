@@ -1,0 +1,14 @@
+carbonara
+    eggs
+    parmesan
+    bacon
+    black pepper
+    salt
+    olive oil
+    pasta noodles
+
+
+eggs
+steak
+fried recipe
+omelette
