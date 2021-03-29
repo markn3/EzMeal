@@ -35,5 +35,22 @@ public class RecipeBook{
         }
     }
 
+    public void printIngredients(Scanner in){
+        System.out.print("Enter the recipe name: ");
+        String name= in.next();
+
+        for(int i = 0; i < recipe_list.length; i++){
+            if(recipe_list[i] == null){
+                break;
+            }
+            if(name.equals(recipe_list[i].getName())){
+                recipe_list[i].getIngredients();
+                break;
+            }
+        }
+
+        System.out.println();
+    }
+
 }
 
