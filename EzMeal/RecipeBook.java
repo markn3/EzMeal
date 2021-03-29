@@ -14,11 +14,6 @@ public class RecipeBook{
         while(recipe_scan.hasNext()){                           // Loops until end of file
             String recipe_line = recipe_scan.nextLine();        // Takes the text file's next line
             String [] recipe_param = recipe_line.split("/");    // Splits the line, delimited with "/", and stores each part into array
-            /*
-            for(int yes = 0; yes < recipe_param.length; yes++){
-                System.out.println("Yes" + yes + ": " + recipe_param[yes]);
-            }
-            */
             String name = recipe_param[0];                      // Takes the name of the recipe. Which should be first element
 
             String [] temp_arr = new String [20];               // Creates a temp array to take in the ingredients
