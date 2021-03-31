@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args)throws IOException{
         Scanner in = new Scanner(System.in);
-        Scanner mm = new Scanner(System.in);
         Menu menu = new Menu();
         RecipeBook rb = new RecipeBook("RecipeData.txt");
         UserBook ub = new UserBook("UserData.txt");
@@ -17,7 +16,7 @@ public class Main {
             int ans = in.nextInt(); 
             if(ans == 1){
                 System.out.println("Logging in....");
-                boolean valid = menu.login(ub, mm);
+                boolean valid = menu.login(ub, in);
                 if(valid){
                     while(true){
                         menu.mainMenu();
@@ -47,7 +46,7 @@ public class Main {
                 }
             }
             else if(ans == 2){
-                System.out.println("Not finished yet");
+                menu.signUp(ub, in);
             }
             else if(ans == 3){
                 System.out.println("\nBye!");
@@ -58,5 +57,6 @@ public class Main {
             }
         }
         in.close();
+        ub.updateUserBook("UserData.txt");
     }   
 }

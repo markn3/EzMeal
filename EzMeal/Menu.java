@@ -30,7 +30,7 @@ public class Menu {
         }
 
         if(success){
-            System.out.println("Welcome " + ub.users[user_index].getName() + "!");
+            System.out.println("Welcome " + ub.users[user_index].getFName() + "!");
         }
         return success;
     }
@@ -41,5 +41,28 @@ public class Menu {
         System.out.println("3. Saved Recipes");
         System.out.println("4. Log out");
         System.out.print("Please input your choice(1~4): ");
+    }
+
+    public void signUp(UserBook ub, Scanner in){
+        System.out.println("\nSign up:\n");
+        System.out.print("Enter first name: ");
+        String fname = in.next();
+
+        System.out.print("\nEnter ID:");
+        String id = in.next();
+
+        System.out.print("\nEnter password: ");
+        String pw = in.next();
+
+        boolean valid_pw = false;
+        while(!valid_pw){
+            System.out.print("\nRe-enter password: ");
+            String pw_2 = in.next();
+            if(pw_2.equals(pw)){
+                valid_pw = true;
+            }
+        }
+
+        ub.addUser(fname, id, pw);
     }
 }

@@ -2,10 +2,9 @@ import java.io.*;
 import java.util.Scanner;
 
 public class RecipeBook{
-    int nr = 30;                                    // number of recipes (for now)
+    int nr;                                         
 
-    Recipe [] recipe_list = new Recipe [nr];        // array that will hold recipes
-
+    Recipe [] recipe_list = new Recipe [20];        // assuming 30 is the max number of recipes (for now)
     // will read the recipe database and initialize
     public RecipeBook(String fn)throws IOException{             // fn = recipe data filename 
         File recipe_file = new File(fn);                        // Creates representation of file
@@ -23,6 +22,7 @@ public class RecipeBook{
             recipe_list[counter] = new Recipe(name, temp_arr);  // Appends the recipe into the array of recipes (puts recipe into list)
             counter++;
         }
+        nr = counter;                                           // ipdates the number of recipes
         recipe_scan.close();
     }
 
