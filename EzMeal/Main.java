@@ -1,4 +1,4 @@
-// CSCI 3326 Project    Members:
+// CSCI 3326 Project    Members: Mark Navalta, Stephen Pagayon, Enrique Manrique
 // Main program
 
 import java.io.*;
@@ -15,6 +15,7 @@ public class Main {
             menu.loginMenu();
             int ans = in.nextInt(); 
             if(ans == 1){
+                // Sign in
                 System.out.println("Logging in....");
                 boolean valid = menu.login(ub, in);
                 if(valid){
@@ -31,7 +32,8 @@ public class Main {
                             rb.printIngredients(in);
                         }
                         else if(ans_2 == 3){
-                            System.out.println("Not finished yet");
+                            // See saved recipes
+                            menu.savedRecipes(ub, in);
                         }
                         else if(ans_2 == 4){
                             break;
@@ -46,6 +48,7 @@ public class Main {
                 }
             }
             else if(ans == 2){
+                // Sign up 
                 menu.signUp(ub, in);
             }
             else if(ans == 3){

@@ -34,15 +34,6 @@ public class Menu {
         }
         return success;
     }
-    
-    public void mainMenu(){
-        System.out.println("\n1. Search Recipes");
-        System.out.println("2. See ingredients");
-        System.out.println("3. Saved Recipes");
-        System.out.println("4. Log out");
-        System.out.print("Please input your choice(1~4): ");
-    }
-
     public void signUp(UserBook ub, Scanner in){
         System.out.println("\nSign up:\n");
         System.out.print("Enter first name: ");
@@ -64,5 +55,30 @@ public class Menu {
         }
 
         ub.addUser(fname, id, pw);
+    }
+    
+    public void mainMenu(){
+        System.out.println("\n1. Search Recipes");
+        System.out.println("2. See ingredients");
+        System.out.println("3. Saved Recipes");
+        System.out.println("4. Log out");
+        System.out.print("Please input your choice(1~4): ");
+    }
+
+    public void savedRecipes(UserBook ub, Scanner in){
+        // TODO: match recipe string name with database recipe and output
+        System.out.print("Enter ID: ");
+        String id = in.next();
+        for(int i = 0; i < ub.nu; i++){
+            if(id.equals(ub.users[i].getId())){
+                String [] temp = ub.users[i].getRecipes();
+                System.out.println("Saved recipes: ");
+                for(int j = 0; j < temp.length; j++){
+                    System.out.println(temp[j]);
+                }
+                break;
+            }
+        }
+
     }
 }

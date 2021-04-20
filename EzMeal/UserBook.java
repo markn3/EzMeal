@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.util.Scanner;
 
@@ -26,12 +25,12 @@ public class UserBook{
             String [] user_ingredients = new String[ni];            // Array for ingredients
             if(nr > 0){                                             // If user has any saved recipes then...
                 for(int i = 0; i < nr; i++){                        //    fill the array with the saved recipes
-                    saved_recipes[i] = user_param[i+4];
+                    saved_recipes[i] = user_param[i+5];
                 }
             } 
             if(ni > 0){                                             //If user has any ingredients then...
-                for(int j = 0; j < nr; j++){                        //   fill the array with the ingredients
-                    user_ingredients[j] = user_param[j+3+nr];
+                for(int j = 0; j < ni; j++){                        //   fill the array with the ingredients
+                    user_ingredients[j] = user_param[j+4+nr];
                 }
             }
             users[counter] = new User(fname, id, pw, nr, ni, saved_recipes, user_ingredients);   // Fill the users array with users
@@ -75,5 +74,7 @@ public class UserBook{
         }
         pw.close();
     }
+
+
     
 }

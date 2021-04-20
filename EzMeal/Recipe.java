@@ -1,4 +1,3 @@
-import java.io.*;
 
 public class Recipe {
     private String name;
