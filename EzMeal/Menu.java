@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.*;
 import java.sql.SQLException;
-public class MM
+public class Menu
 {
 	JFrame menu1 = new JFrame("1st Window");
     JFrame login_menu = new JFrame("Login Window");
@@ -19,8 +19,7 @@ public class MM
     private JTextField idField, pwField;
 
 	
-	SwingMethods iv = new SwingMethods();
-	public MM() throws SQLException
+	public Menu() throws SQLException
 	{
         // ################### Main menu #######################################
         //#region

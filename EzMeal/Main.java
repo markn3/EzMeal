@@ -5,15 +5,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-// Initialzie recipe database into local string array at beginning
-// Same with user database
-
-public class App{
+public class Main{
     public static void main(String args[]) throws SQLException
 	{
+        // Initialize databases
         RecipeBook rb = new RecipeBook();
         UserBook ub = new UserBook();
-        
-		new MM();
+
+		new Menu();
 	}
 }
