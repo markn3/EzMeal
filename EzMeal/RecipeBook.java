@@ -62,7 +62,7 @@ public class RecipeBook {
 		Connection connection = DriverManager.getConnection(s1, "root", "1234qwer");
 		Statement stmt = connection.createStatement();
 
-        stmt.executeUpdate("DELETE FROM cars WHERE NAME = '" + recipe_name +"';");
+        stmt.executeUpdate("DELETE FROM recipes WHERE NAME = '" + recipe_name +"';");
         connection.close();
         System.out.println("Delete!");
     }

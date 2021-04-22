@@ -1,7 +1,7 @@
 // User class
 
 public class User{
-    private String fname;
+    private String name;
     private String id;
     private String pw;
     int nr;            // number of recipes saved
@@ -11,7 +11,7 @@ public class User{
     String [] usr_ingredients = new String [20];  // Assuming max number of ingredients (for now) is 20
 
     public User(String n, String i, String p, int num_rec, int num_ing, String [] r, String [] ing){
-        this.fname = n;
+        this.name = n;
         this.id = i;
         this.pw = p;
         this.nr = num_rec;
@@ -20,8 +20,8 @@ public class User{
         this.usr_ingredients = ing;
     }
 
-    public String getFName(){
-        return fname;
+    public String getName(){
+        return name;
     }
 
     public String getId(){
