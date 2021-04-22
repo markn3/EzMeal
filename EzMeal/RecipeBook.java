@@ -1,56 +1,69 @@
-import java.io.*;
-import java.util.Scanner;
+import java.sql.SQLException;
+import java.sql.*;
 
-public class RecipeBook{
+public class RecipeBook {
     int nr;                                         
-
     Recipe [] recipe_list = new Recipe [20];        // assuming 30 is the max number of recipes (for now)
-    // will read the recipe database and initialize
-    public RecipeBook(String fn)throws IOException{             // fn = recipe data filename 
-        File recipe_file = new File(fn);                        // Creates representation of file
-        Scanner recipe_scan = new Scanner(recipe_file);         // Creates scanner to read through representation
-        int counter = 0;                                        // Counter to append to recipe_list
-        while(recipe_scan.hasNext()){                           // Loops until end of file
-            String recipe_line = recipe_scan.nextLine();        // Takes the text file's next line
-            String [] recipe_param = recipe_line.split("/");    // Splits the line, delimited with "/", and stores each part into array
-            String name = recipe_param[0];                      // Takes the name of the recipe. Which should be first element
 
-            String [] temp_arr = new String [20];               // Creates a temp array to take in the ingredients
-            for(int i = 1; i < recipe_param.length; i++){       // Loops until end of line (end of recipe?)
-                temp_arr[i-1] = recipe_param[i];                // Appends ingredients to temp array
+    public RecipeBook()throws SQLException{
+        String s1 = "jdbc:mysql://34.72.168.150:3306/RecipeData?useSSL=false";
+		Connection connection = DriverManager.getConnection(s1, "root", "1234qwer");
+		Statement stmt = connection.createStatement();
+		String sqlStatement = "SELECT * FROM recipes";
+		ResultSet result = stmt.executeQuery(sqlStatement);
+
+        int i = 0;
+        while(result.next()){
+            String recipe_name = result.getString(1);
+            int num_ingredients = result.getInt(2);
+            String [] ingredients = new String [15];
+            int SQL_index = 3;
+            int arr_index = 0;
+            while(result.getString(SQL_index) != null){
+                ingredients[arr_index] = result.getString(SQL_index);
+                SQL_index++;
+                arr_index++;
             }
-            recipe_list[counter] = new Recipe(name, temp_arr);  // Appends the recipe into the array of recipes (puts recipe into list)
-            counter++;
+
+            Recipe temp = new Recipe(recipe_name,num_ingredients, ingredients);
+            recipe_list[i] = temp;
+            i++;
         }
-        nr = counter;                                           // ipdates the number of recipes
-        recipe_scan.close();
+
+        connection.close();
+		System.out.println("Displaying all");
     }
 
-    public void displayRecipes(){                               
-        for(int i = 0; i < nr; i++){
-            if(recipe_list[i] == null){                            
-                break;
-            }
-            System.out.println(recipe_list[i].getName());
-        }
-    }
-
-    public void printIngredients(Scanner in){
-        System.out.print("Enter the recipe name: ");
-        String name= in.next();
-
-        for(int i = 0; i < recipe_list.length; i++){
-            if(recipe_list[i] == null){
-                break;
-            }
-            if(name.equals(recipe_list[i].getName())){
-                recipe_list[i].getIngredients();
-                break;
+    public void add_recipe(String recipe_name, int num_ing, String ... i) throws SQLException{
+		String s1 = "jdbc:mysql://34.72.168.150:3306/RecipeData?useSSL=false";
+		Connection connection = DriverManager.getConnection(s1, "root", "1234qwer");
+		Statement stmt = connection.createStatement();
+        String update_string = "INSERT INTO recipes Values('" + recipe_name +"','" + num_ing;
+        if(num_ing != 0){
+            for(String ing: i){
+                String ing_string = ",'" + i;
+                update_string += ing_string;
             }
         }
 
-        System.out.println();
+        for(int j = 15-num_ing; j >0; j++){
+            String null_string = ", null";
+            update_string += null_string;
+        }
+
+
+		stmt.executeUpdate(update_string + ");");
+		connection.close();
+		System.out.println("Add!");
     }
 
+    public void delete_recipe(String recipe_name) throws SQLException{
+        String s1 = "jdbc:mysql://34.72.168.150:3306/RecipeData?useSSL=false";
+		Connection connection = DriverManager.getConnection(s1, "root", "1234qwer");
+		Statement stmt = connection.createStatement();
+
+        stmt.executeUpdate("DELETE FROM cars WHERE NAME = '" + recipe_name +"';");
+        connection.close();
+        System.out.println("Delete!");
+    }
 }
-
