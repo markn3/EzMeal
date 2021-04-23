@@ -12,6 +12,6 @@ public class Main{
         RecipeBook rb = new RecipeBook();
         UserBook ub = new UserBook();
 
-		new Menu();
+        new StartMenu();
 	}
 }

@@ -31,7 +31,6 @@ public class RecipeBook {
         }
 
         connection.close();
-		System.out.println("Displaying all");
     }
 
     public void add_recipe(String recipe_name, int num_ing, String ... i) throws SQLException{
@@ -65,5 +64,47 @@ public class RecipeBook {
         stmt.executeUpdate("DELETE FROM recipes WHERE NAME = '" + recipe_name +"';");
         connection.close();
         System.out.println("Delete!");
+    }
+
+    // Returns recipe
+    public Recipe [] IngredientMatchRecipes(String [] ingredients){
+        Recipe [] matched_recipes = new Recipe[20];
+        int [] recipe_points = new int[20];
+        
+        for(int i = 0; i < nr; i++){
+            int points = 0;
+
+            int num_recipe_ingredients = recipe_list[i].getNumIngredients();    // length of recipe i;
+            String [] temp_recipes = recipe_list[i].getIngredients();           // Ingredients for recipe i;
+
+            for(int j = 0; j < num_recipe_ingredients; j++){
+                for(int k = 0; k <num_recipe_ingredients;k++){
+                    if(temp_recipes[j].equals(ingredients[k])){
+                        points++;
+                    }
+                }
+            }
+            recipe_points[i] = points;
+
+        }
+
+        // selection sort 
+        for(int l = 0; l < 20; l++){
+            int min_index = l;
+            for(int m = l+1; m < 20; m++){
+                if(recipe_points[m] < recipe_points[min_index]){
+                    min_index = m;
+                }
+                // Swap recipes
+                matched_recipes[min_index] = recipe_list[l];
+                matched_recipes[l] = recipe_list[min_index];        
+
+                // Swap ints
+                int temp = recipe_points[min_index];
+                recipe_points[min_index] = recipe_points[l];
+                recipe_points[l] = temp;
+            }
+        }
+        return matched_recipes;
     }
 }

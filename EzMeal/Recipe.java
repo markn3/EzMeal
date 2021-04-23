@@ -25,18 +25,28 @@ public class Recipe {
         this.name = n;
     }
 
+    public int getNumIngredients(){
+        return num_ingredients;
+    }
+
     public String getName(){
         return name;
     }
 
-    public void getIngredients(){
+    public String[] getIngredients(){ 
+        return ingredients;
+    }
+
+    /*
+
         System.out.println("\nIngredients for " + name +": ");
         for(int i = 0; i < 20; i++){
             if(ingredients[i] == null){
                 break;
             }
             System.out.println(ingredients[i]);
-        }   
-    }
+        }  
+    */
+
 
 }

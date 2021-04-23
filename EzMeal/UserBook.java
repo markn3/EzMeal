@@ -40,15 +40,17 @@ public class UserBook {
         String s1 = "jdbc:mysql://34.72.168.150:3306/UserData?useSSL=false";
 		Connection connection = DriverManager.getConnection(s1, "root", "1234qwer");
 		Statement stmt = connection.createStatement();
-        String update_string = "INSERT INTO users Values('" + name +"','" + id + "','" + pw +"','" + 0 +"','" + 0;
+        String update_string = ("INSERT INTO users VALUES ('" + name + "','" + id + "','" + pw + "','" + 0 + "','" + 0 +"'");
         for(int i = 0; i < 15; i++){
             update_string += ", null";
         }
+        update_string += ");";
+        System.out.println("Update_string: " + update_string);
         
-		stmt.executeUpdate(update_string + ");");
+        
+		stmt.executeUpdate(update_string);
 		connection.close();
 		System.out.println("Add!");
-
     }
 
     public void delete_user(String id, String pw)throws SQLException{

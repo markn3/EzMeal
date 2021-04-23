@@ -47,4 +47,5 @@ public class User{
     public String [] getIngredients(){
         return usr_ingredients;
     }
+
 }

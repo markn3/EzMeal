@@ -1,10 +1,9 @@
 
 import javax.swing.*;
-
 import java.awt.Color;
 import java.awt.event.*;
 import java.sql.SQLException;
-public class Menu
+public class StartMenu
 {
 	JFrame menu1 = new JFrame("1st Window");
     JFrame login_menu = new JFrame("Login Window");
@@ -19,12 +18,12 @@ public class Menu
     private JTextField idField, pwField;
 
 	
-	public Menu() throws SQLException
+	public StartMenu() throws SQLException
 	{
         // ################### Main menu #######################################
         //#region
         menu1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menu1.setSize(500, 500);
+        menu1.setSize(600, 600);
         menu1.setLayout(null);
 
 		login_button = new JButton("Login");
@@ -52,7 +51,7 @@ public class Menu
         // ################### Login Menu ######################################
         //#region
         login_menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        login_menu.setSize(500, 500);
+        login_menu.setSize(600, 600);
         login_menu.setLayout(null);
 
         idLabel = new JLabel("ID:");
@@ -82,37 +81,9 @@ public class Menu
 		login_menu.add(login_button2);
         //#endregion
 
-        // ################### Main Recipe Menu #####################################
-        //#region
-        recipe_main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        recipe_main.setSize(500, 500);
-        recipe_main.setLayout(null);
-
-        search_button = new JButton("Search Recipes");
-		search_button.setSize(100, 30);
-		search_button.setLocation(200, 50);
-		search_button.addActionListener(new search_buttonClicked());
-		recipe_main.add(search_button);
-
-		
-		saved_button = new JButton("Saved Recipes");
-		saved_button.setSize(100, 30);
-		saved_button.setLocation(200, 200);
-		saved_button.addActionListener(new saved_buttonClicked());
-		recipe_main.add(saved_button);
-
-		
-		signOut_button = new JButton("Sign out");
-		signOut_button.setSize(100, 30);
-		signOut_button.setLocation(200, 350);
-		signOut_button.addActionListener(new signOut_buttonClicked());
-		recipe_main.add(signOut_button);
-        //#endregion
-
-
 		// ################### Search Recipes ##############################
         search_menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        search_menu.setSize(500, 500);
+        search_menu.setSize(600, 600);
         search_menu.setLayout(null);
 
 		JPanel card1 = new JPanel();
@@ -139,7 +110,13 @@ public class Menu
         // TODO: signup and then register to database
 		public void actionPerformed(ActionEvent e)
 		{
-			System.out.println("signup_button button clicked!");
+			menu1.dispose();
+            try {
+                new SignUpMenu();
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
 		}
 	}
 	private class exit_buttonClicked implements ActionListener
@@ -160,8 +137,7 @@ public class Menu
 		public void actionPerformed(ActionEvent e)
 		{
             login_menu.dispose();
-            recipe_main.setVisible(true);
-
+			new MainMenu();
 		}
     }
     //#endregion
