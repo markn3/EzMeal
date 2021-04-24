@@ -69,4 +69,18 @@ public class UserBook {
         }
         */
     }
+
+    public boolean valid_user(String id, String pw)throws SQLException{
+        String s1 = "jdbc:mysql://34.72.168.150:3306/UserData?useSSL=false";
+		Connection connection = DriverManager.getConnection(s1, "root", "1234qwer");
+		Statement stmt = connection.createStatement();
+        String sqlStatement = "SELECT name FROM users WHERE id = '" + id  + "' AND password = '" + pw  + "'";
+		ResultSet result = stmt.executeQuery(sqlStatement);
+        if(result.next()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

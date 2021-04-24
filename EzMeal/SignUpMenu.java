@@ -14,11 +14,11 @@ public class SignUpMenu{
 
 
     public SignUpMenu() throws SQLException{
+
         menu.setSize(600, 400);	// Window Resolution (1024, 768 || 600, 600)
         menu.setResizable(false);	// Not Resize
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu.setLayout(new FlowLayout());
-        
         
         JLabel nameLabel = new JLabel("Name: ");
 		nameLabel.setSize(150, 30);
@@ -66,11 +66,10 @@ public class SignUpMenu{
 
 
         JButton done_button = new JButton("Done");
+        JButton back_button = new JButton("Back");
 
         // Create action listeners for buttons to register clicks
         done_button.addActionListener(new done_buttonClicked());
-
-        JButton back_button = new JButton("Back");
         back_button.addActionListener(new back_buttonClicked());
                 
         Container mainContainer = menu.getContentPane();
