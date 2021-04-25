@@ -8,7 +8,7 @@ public class MainMenu extends JFrame {
     JLabel title1 = new JLabel("Good evening	");
     JButton rec_button = new JButton("Recommendations");
     JButton ing_button = new JButton("Ingredients");
-    JButton social_button = new JButton("Social");
+    JButton refresh_button = new JButton("Refresh");    
     JButton fil1_button = new JButton("Filter1");
     JButton fil2_button = new JButton("Filter2");
     JButton fil3_button = new JButton("Filter3");
@@ -47,7 +47,7 @@ public class MainMenu extends JFrame {
         
         topPanel.add(rec_button);
         topPanel.add(ing_button);
-        topPanel.add(social_button);
+        topPanel.add(refresh_button);
         
         // Panel Mid
         JPanel midPanel = new JPanel();
@@ -68,7 +68,7 @@ public class MainMenu extends JFrame {
         for(int i = 0; i < buttons.length; i++){
             try {
                 buttons[i] = new RecipeButton(temp.recipe_list[i]);
-                buttons[i].addActionListener(new RecipeListener(temp.recipe_list[i]));
+                buttons[i].addActionListener(new RecipeListener(usr,temp.recipe_list[i]));
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block
@@ -105,6 +105,7 @@ public class MainMenu extends JFrame {
         search_button.addActionListener(new search_buttonClicked());
         signOut_button.addActionListener(new signout_buttonClicked());
         saved_button.addActionListener(new saved_clicked());
+        refresh_button.addActionListener(new refresh_clicked());
 
         botPanel.setBackground(new Color(37, 42, 52));
         botPanel.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(44, 49, 63)));
@@ -154,6 +155,26 @@ public class MainMenu extends JFrame {
             } catch (SQLException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
+            }
+            
+		}
+	}
+
+    private class refresh_clicked implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{			
+			System.out.println("Refresh button clicked!");
+            
+            try {
+                dispose();
+                UserBook temp;
+                temp = new UserBook();
+                User re_usr = temp.valid_user(usr.getId(), usr.getPw());
+                new MainMenu(re_usr);
+
+
+            } catch (SQLException e1) {
             }
             
 		}

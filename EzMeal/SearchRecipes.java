@@ -7,15 +7,19 @@ import javax.swing.*;
 
 public class SearchRecipes extends JFrame{ // JFrame
 
-    JButton backbutton = new JButton("Back");
-    JButton saveButton = new JButton("Save");
+    JButton backButton = new JButton("Back");
     User usr;
 
     SearchRecipes(User usr,String query) throws SQLException{
-        // If the user presses the saved button
+        super(query);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
+
         this.usr = usr;
+
+        backButton.addActionListener(new backButton_clicked());
+
+        // If the user presses the saved button
         if(query.equals("Saved")){
             setSize(1080, 720);	                                // Window Resolution (1024, 768 || 600, 600)
 
@@ -38,8 +42,6 @@ public class SearchRecipes extends JFrame{ // JFrame
             container.setSize(500, 500);
             container.setBackground(Color.BLUE);
 
-            backbutton.addActionListener(new backbutton_clicked());
-
             // Panel that will have the saved recipes in a grid
             JPanel gridPanel = new JPanel();                
             gridPanel.setLayout(new GridLayout(0, 3, 5, 5));        // (row, col, space, space)
@@ -51,7 +53,7 @@ public class SearchRecipes extends JFrame{ // JFrame
             for(int i = 0; i < buttons.length; i++){
                 try {
                     buttons[i] = new RecipeButton(savedRecipesArr[i]); // Custom button
-                    buttons[i].addActionListener(new RecipeListener(temp.recipe_list[i])); // Custom actionlistener
+                    buttons[i].addActionListener(new RecipeListener(usr, temp.recipe_list[i])); // Custom actionlistener
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -65,7 +67,7 @@ public class SearchRecipes extends JFrame{ // JFrame
             JScrollPane scrollPane = new JScrollPane(gridPanel);
             scrollPane.setPreferredSize(new Dimension(1000,700));
             container.add(scrollPane);
-            container.add(backbutton);
+            container.add(backButton);
             add(container);
             setVisible(true);
 
@@ -100,7 +102,7 @@ public class SearchRecipes extends JFrame{ // JFrame
         }
 
     }
-    private class backbutton_clicked implements ActionListener
+    private class backButton_clicked implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{			

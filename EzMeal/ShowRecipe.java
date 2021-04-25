@@ -1,5 +1,6 @@
 import java.awt.event.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -9,13 +10,39 @@ import java.io.IOException;
 
 
 public class ShowRecipe extends JFrame{
+    JButton saveButton = new JButton("Save recipe");
+    JButton deleteButton = new JButton("Delete recipe from saved");
+    User usr;
+    Recipe r;
 
-    ShowRecipe(Recipe r) throws IOException{
+    ShowRecipe(User usr, Recipe r) throws IOException{
         super(r.getName());
         setSize(1080, 720);	// Window Resolution (1024, 768 || 600, 600)
         setResizable(false);	// Not Resize
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
+
+        this.usr = usr;
+        this.r = r;
+
+        boolean saved_recipe = false;
+        for(int i = 0; i < usr.nr; i++){
+            if(usr.saved_recipes[i].equals(r.getName())){
+                saved_recipe = true;
+                
+            }
+        }
+        if(saved_recipe == true){  //  add delete button
+            deleteButton.addActionListener(new deleteButton_clicked());
+            add(deleteButton);
+        }
+        else{   // add save button
+            saveButton.addActionListener(new saveButton_clicked());
+            add(saveButton);
+        }
+
+        saveButton.addActionListener(new saveButton_clicked());
+
 
         JList<String> ing = new JList<String>(r.getIngredients());
 
@@ -42,4 +69,35 @@ public class ShowRecipe extends JFrame{
         setVisible(true);
     }
     
+    private class saveButton_clicked implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{			
+			System.out.println("Save button clicked!");
+
+            try {
+                usr.saveRecipe(r.getName());
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+		}
+	}
+
+    private class deleteButton_clicked implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{			
+			System.out.println("Delete button clicked!");
+
+            try {
+                usr.deleteRecipe(r.getName());
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+		}
+	}
 }
