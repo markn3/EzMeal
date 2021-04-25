@@ -61,13 +61,6 @@ public class UserBook {
         stmt.executeUpdate("DELETE FROM users WHERE pw = '" + pw +"';");
         connection.close();
         System.out.println("Delete!");
-        /* Create authentication for account deletion
-		String sqlStatement = "SELECT PASSWORD FROM recipes WHERE ID = '" + id +"'";
-		ResultSet result = stmt.executeQuery(sqlStatement);
-        if(result.getString() != null){
-
-        }
-        */
     }
 
     public boolean valid_user(String id, String pw)throws SQLException{

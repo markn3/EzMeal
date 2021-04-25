@@ -1,31 +1,33 @@
 import java.awt.event.*;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.awt.*;
 import javax.swing.*;
 
 public class MainMenu extends JFrame {
+    JLabel title1 = new JLabel("Good evening	");
+    JButton rec_button = new JButton("Recommendations");
+    JButton ing_button = new JButton("Ingredients");
+    JButton social_button = new JButton("Social");
+    JButton fil1_button = new JButton("Filter1");
+    JButton fil2_button = new JButton("Filter2");
+    JButton fil3_button = new JButton("Filter3");
+    JButton fil4_button = new JButton("Filter4");
+    JButton home_button = new JButton("Home");
+    JButton search_button = new JButton("Search");
+    JButton saved_button = new JButton("Saved");
+    JButton hist_button = new JButton("History");
+    JButton signOut_button = new JButton("Sign Out");
 
-    
-    MainMenu() {
+    MainMenu() throws SQLException {
         super("Ez-Meal");	// Window Name
         setSize(1080, 720);	// Window Resolution (1024, 768 || 600, 600)
         setResizable(false);	// Not Resize
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
         
-        JLabel title1 = new JLabel("Good evening	");
-        JButton rec_button = new JButton("Recommendations");
-        JButton ing_button = new JButton("Ingredients");
-        JButton social_button = new JButton("Social");
-        JButton fil1_button = new JButton("Filter1");
-        JButton fil2_button = new JButton("Filter2");
-        JButton fil3_button = new JButton("Filter3");
-        JButton fil4_button = new JButton("Filter4");
-        JButton home_button = new JButton("Home");
-        JButton search_button = new JButton("Search");
-        JButton saved_button = new JButton("Saved");
-        JButton hist_button = new JButton("History");
-        JButton signOut_button = new JButton("Sign Out");
+
+        
 
         // Create action listeners for buttons to register clicks
         search_button.addActionListener(new search_buttonClicked());
@@ -56,25 +58,48 @@ public class MainMenu extends JFrame {
         
         // Panel Mid
         JPanel midPanel = new JPanel();
+        midPanel.setLayout(new GridLayout(4, 1, 5, 5));
         midPanel.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(20, 26, 39)));	// open to change
         midPanel.setBackground(new Color(20, 26, 39));
-        
+
+        // Recipe grid
+        //#region
+        RecipeBook temp = new RecipeBook();
+
+        JPanel recipeContainer = new JPanel();
         JPanel gridPanel = new JPanel();    
-        gridPanel.setLayout(new GridLayout(4, 1, 5, 5));
+        gridPanel.setLayout(new GridLayout(0, 3, 5, 5));
         gridPanel.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(20, 26, 39)));
         gridPanel.setBackground(new Color(20, 26, 39));	//dark grey
+
+        JButton [] buttons = new JButton[12];
+        for(int i = 0; i < buttons.length; i++){
+            try {
+                buttons[i] = new RecipeButton(temp.recipe_list[0]);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            buttons[i].setPreferredSize(new Dimension(300,200));
+            gridPanel.add(buttons[i]);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(gridPanel);
+        scrollPane.setPreferredSize(new Dimension(500,300));
+        ////#endregion
         
-        gridPanel.add(fil1_button);
-        gridPanel.add(fil2_button);
-        gridPanel.add(fil3_button);
-        gridPanel.add(fil4_button);
+
+        midPanel.add(fil1_button);
+        midPanel.add(fil2_button);
+        midPanel.add(fil3_button);
+        midPanel.add(fil4_button);
         
-        JLabel label = new JLabel("Center Box", SwingConstants.CENTER);
-        label.setOpaque(true);
-        label.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(20, 26, 39)));
-        
-        midPanel.add(gridPanel);
-        mainContainer.add(label);
+        //JLabel label = new JLabel("Center Box", SwingConstants.CENTER);
+        //label.setOpaque(true);
+        //label.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(20, 26, 39)));
+    
+        mainContainer.add(scrollPane, BorderLayout.CENTER);
+        //mainContainer.add(label);
         mainContainer.add(midPanel, BorderLayout.WEST);
         
         // Panel bottom

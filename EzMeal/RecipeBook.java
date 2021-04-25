@@ -15,9 +15,10 @@ public class RecipeBook {
         int i = 0;
         while(result.next()){
             String recipe_name = result.getString(1);
-            int num_ingredients = result.getInt(2);
+            String pic = result.getString(2);
+            int num_ingredients = result.getInt(3);
             String [] ingredients = new String [15];
-            int SQL_index = 3;
+            int SQL_index = 4;
             int arr_index = 0;
             while(result.getString(SQL_index) != null){
                 ingredients[arr_index] = result.getString(SQL_index);
@@ -25,7 +26,7 @@ public class RecipeBook {
                 arr_index++;
             }
 
-            Recipe temp = new Recipe(recipe_name,num_ingredients, ingredients);
+            Recipe temp = new Recipe(recipe_name, pic, num_ingredients, ingredients);
             recipe_list[i] = temp;
             i++;
         }

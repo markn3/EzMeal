@@ -2,6 +2,7 @@
 public class Recipe {
     private String name;
     private int num_ingredients;
+    private String pic;
     /*
     private String country;
     private String mealTime;
@@ -13,10 +14,12 @@ public class Recipe {
     String [] ingredients = new String[15];
 
     // constructor
-    public Recipe(String n, int n_i, String [] i) {
+    public Recipe(String n, String pic, int n_i, String [] i) {
         this.name = n;
+        this.pic = pic;
         this.num_ingredients = n_i;
         this.ingredients = i;
+
     }
 
     // setter and getter functions
@@ -33,6 +36,9 @@ public class Recipe {
         return name;
     }
 
+    public String getPic(){
+        return pic;
+    }
     public String[] getIngredients(){ 
         return ingredients;
     }
