@@ -13,10 +13,8 @@ public class MainMenu extends JFrame {
     JButton fil2_button = new JButton("Filter2");
     JButton fil3_button = new JButton("Filter3");
     JButton fil4_button = new JButton("Filter4");
-    JButton home_button = new JButton("Home");
     JButton search_button = new JButton("Search");
     JButton saved_button = new JButton("Saved");
-    JButton hist_button = new JButton("History");
     JButton signOut_button = new JButton("Sign Out");
     User usr;
     Container mainContainer = this.getContentPane();
@@ -30,14 +28,6 @@ public class MainMenu extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
         this.usr = entered_usr;
-
-
-        
-
-        // Create action listeners for buttons to register clicks
-        search_button.addActionListener(new search_buttonClicked());
-        signOut_button.addActionListener(new signout_buttonClicked());
-        saved_button.addActionListener(new saved_clicked());
 
 
         mainContainer.setLayout(new BorderLayout(8,6));
@@ -69,8 +59,6 @@ public class MainMenu extends JFrame {
         //#region
         RecipeBook temp = new RecipeBook();
 
-        JPanel recipeContainer = new JPanel();
-        //recipeContainer.setSize(1000, 400);
         JPanel gridPanel = new JPanel();    
         gridPanel.setLayout(new GridLayout(0, 3, 5, 5));
         gridPanel.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(20, 26, 39)));
@@ -90,35 +78,34 @@ public class MainMenu extends JFrame {
             gridPanel.add(buttons[i]);
         }
 
+        // JScrollPane more like JScroll-Pain aha
         JScrollPane scrollPane = new JScrollPane(gridPanel);
         scrollPane.setPreferredSize(new Dimension(500,300));
-        //recipeContainer.add(scrollPane);
-        ////#endregion
+        //#endregion
         
-
+        // Add buttons to left side panel
         midPanel.add(fil1_button);
         midPanel.add(fil2_button);
         midPanel.add(fil3_button);
         midPanel.add(fil4_button);
-        
-        //JLabel label = new JLabel("Center Box", SwingConstants.CENTER);
-        //label.setOpaque(true);
-        //label.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(20, 26, 39)));
     
         mainContainer.add(scrollPane, BorderLayout.CENTER);
-
-        //mainContainer.add(label);
         mainContainer.add(midPanel, BorderLayout.WEST);
         
         // Panel bottom
         JPanel botPanel = new JPanel();
         botPanel.setLayout(new FlowLayout(3));
         
-        botPanel.add(home_button);
+        // Add buttons to bottom panel
         botPanel.add(search_button);
         botPanel.add(saved_button);
-        botPanel.add(hist_button);
         botPanel.add(signOut_button);
+
+        // Create action listeners for buttons to register clicks
+        search_button.addActionListener(new search_buttonClicked());
+        signOut_button.addActionListener(new signout_buttonClicked());
+        saved_button.addActionListener(new saved_clicked());
+
         botPanel.setBackground(new Color(37, 42, 52));
         botPanel.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(44, 49, 63)));
         mainContainer.add(botPanel, BorderLayout.SOUTH);
@@ -159,18 +146,16 @@ public class MainMenu extends JFrame {
 		public void actionPerformed(ActionEvent e)
 		{			
 			System.out.println("Saved button clicked!");
-            /*
+            
             try {
-                //mainContainer.repaint();
-                //JPanel saved = new SearchRecipes(usr, "Saved");
-                //mainContainer.add(saved, BorderLayout.CENTER);
-
+                dispose();
+                new SearchRecipes(usr, "Saved");
 
             } catch (SQLException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
-            */
+            
 		}
 	}
 

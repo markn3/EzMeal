@@ -11,10 +11,11 @@ public class RecipeButton extends JButton {
     JLabel pic_label = new JLabel();
 
     RecipeButton(Recipe rp) throws IOException {
+
         pic_label.setSize(300,200);
         text.setText(rp.getName());
         text.setSize(300,200);
-        text.setBackground(Color.GREEN);
+
 
         BufferedImage img = null;
         img = ImageIO.read(new File(rp.getPic()));

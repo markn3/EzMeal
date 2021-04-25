@@ -12,17 +12,12 @@ public class StartMenu
     JFrame login_menu = new JFrame("Login Window");
     JFrame recipe_main = new JFrame("Recipe Menu");
 	JFrame search_menu = new JFrame("Search Recipes");
-	
 
 	private JButton login_button , signup_button, exit_button;
 	private JButton login_button2, back_button;
-	private JButton search_button, saved_button, signOut_button;
 
     private JLabel idLabel, pwLabel;
     private JTextField idField, pwField;
-
-
-
 	
 	public StartMenu() throws SQLException
 	{
@@ -118,16 +113,6 @@ public class StartMenu
 		botPanel.add(back_button);
         //#endregion
 
-		// ################### Search Recipes ##############################
-        search_menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        search_menu.setSize(600, 600);
-        search_menu.setLayout(null);
-
-		JPanel card1 = new JPanel();
-		card1.setBackground(Color.BLUE);
-		card1.setBounds(0, 0, 250, 250);
-		search_menu.add(card1);
-
 	}
 
     // ---------------------- Main Menu Buttons ----------------------------------
@@ -169,12 +154,9 @@ public class StartMenu
     //#region
     private class login_button2Clicked implements ActionListener
 	{
-        // TODO: make pop-up window for failed login. Maybe another J frame. 
-		// Also, maybe a greeting after a successful login
 		public void actionPerformed(ActionEvent e)
 		{
 			try {
-
 				User valid = ub.valid_user(idField.getText(), pwField.getText());
 				if(valid != null){
 					login_menu.dispose();
@@ -189,52 +171,16 @@ public class StartMenu
 				e1.printStackTrace();
 			}
 
-
 		}
     }
 
 	private class back_buttonClicked implements ActionListener
 	{
-        // TODO: Check user database for sign in. Use if or else
-        // Also, make pop-up window for failed login. Another JFrame
 		public void actionPerformed(ActionEvent e)
 		{
             login_menu.dispose();
 			menu1.setVisible(true);
 		}
     }
-    //#endregion
-    
-    // ###############  Recipe Main Menu Buttons ################
-    //#region
-    private class search_buttonClicked implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e)
-		{			
-			System.out.println("search button clicked");
-            recipe_main.dispose();
-			search_menu.setVisible(true);
-		}
-	}
-
-    private class saved_buttonClicked implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e)
-		{			
-			System.out.println("saved button clicked!");
-            menu1.dispose();
-			login_menu.setVisible(true);
-		}
-	}
-
-    private class signOut_buttonClicked implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e)
-		{			
-			System.out.println("signout button clicked!");
-            menu1.dispose();
-			login_menu.setVisible(true);
-		}
-	}
     //#endregion
 }

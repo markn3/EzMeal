@@ -5,12 +5,12 @@ import javax.swing.*;
 
 public class SignUpMenu{
     JFrame menu = new JFrame("Sign up");    
-    private JTextField nameField = new JTextField();                // Set JTextFields outside so that it can be raeched
+    private JTextField nameField = new JTextField();                // Set JTextFields outside so that it can be reached
     private JTextField idField = new JTextField();
     private JTextField passwordField = new JTextField();
     private JTextField confirmationField = new JTextField();
 
-    UserBook temp = new UserBook();                         // Creates a instance of UserBook to update database
+    UserBook temp = new UserBook();                                // Creates a instance of UserBook to update database
 
 
     public SignUpMenu() throws SQLException{

@@ -6,12 +6,15 @@ public class UserBook {
     User [] users = new User[20];    // Assuming max number of users is 20 (for now)
  
     public UserBook()throws SQLException{
+        
+        // Establish connection with SQL server and get data
         String s1 = "jdbc:mysql://34.72.168.150:3306/UserData?useSSL=false";
 		Connection connection = DriverManager.getConnection(s1, "root", "1234qwer");
 		Statement stmt = connection.createStatement();
 		String sqlStatement = "SELECT * FROM users";
 		ResultSet result = stmt.executeQuery(sqlStatement);
 
+        // Parse through data and put in arrays
         int i = 0;
         while(result.next()){
             String name = result.getString(1);
@@ -39,17 +42,21 @@ public class UserBook {
     }
 
     public void add_user(String name, String id, String pw)throws SQLException  {
+        // establish connection
         String s1 = "jdbc:mysql://34.72.168.150:3306/UserData?useSSL=false";
 		Connection connection = DriverManager.getConnection(s1, "root", "1234qwer");
 		Statement stmt = connection.createStatement();
+
+        // Build string
         String update_string = ("INSERT INTO users VALUES ('" + name + "','" + id + "','" + pw + "','" + 0 + "','" + 0 +"'");
+        
         for(int i = 0; i < 15; i++){
             update_string += ", null";
         }
         update_string += ");";
         System.out.println("Update_string: " + update_string);
         
-        
+        // Execute string
 		stmt.executeUpdate(update_string);
 		connection.close();
 		System.out.println("Add!");
@@ -66,16 +73,20 @@ public class UserBook {
     }
 
     public User valid_user(String id, String pw)throws SQLException{
+
+        // Establish connection
         String s1 = "jdbc:mysql://34.72.168.150:3306/UserData?useSSL=false";
 		Connection connection = DriverManager.getConnection(s1, "root", "1234qwer");
 		Statement stmt = connection.createStatement();
+
         String sqlStatement = "SELECT * FROM users WHERE id = '" + id  + "' AND password = '" + pw  + "'";
 		ResultSet result = stmt.executeQuery(sqlStatement);
-        System.out.println("ID: " + id + "   pw: " + pw);
+
+        // If user exists
         if(result.next()){
             String usr_id = result.getString(2);
 
-            if(users[0].getId().equals(usr_id)){
+            if(users[0].getId().equals(usr_id)){        
                 for(int i = 0; i < nu; i++){
                     if(users[i].getId().equals(result.getString(2))){
                         connection.close();

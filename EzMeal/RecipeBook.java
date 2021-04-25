@@ -3,7 +3,7 @@ import java.sql.*;
 
 public class RecipeBook {
     int nr;                                         
-    Recipe [] recipe_list = new Recipe [20];        // assuming 30 is the max number of recipes (for now)
+    Recipe [] recipe_list = new Recipe [20];        // assuming 20 is the max number of recipes (for now)
 
     public RecipeBook()throws SQLException{
         String s1 = "jdbc:mysql://34.72.168.150:3306/RecipeData?useSSL=false";

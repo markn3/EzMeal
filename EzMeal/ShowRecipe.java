@@ -28,7 +28,6 @@ public class ShowRecipe extends JFrame{
         JLabel leftLabel = new JLabel("Ingredients:");
         leftP.add(leftLabel);
         leftP.add(ing);
-
         
         JLabel pic = new JLabel();
         pic.setSize(500,350);
@@ -41,7 +40,6 @@ public class ShowRecipe extends JFrame{
         add(leftP, BorderLayout.WEST);
         add(pic, BorderLayout.NORTH);
         setVisible(true);
-
     }
     
 }
