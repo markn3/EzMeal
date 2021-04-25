@@ -34,6 +34,8 @@ public class UserBook {
             users[i] = new User(name, id, pw, num_recipes, num_ingredients, temp_recipes, temp_ingredients);
             i++;
         }
+        nu = i;
+        connection.close();
     }
 
     public void add_user(String name, String id, String pw)throws SQLException  {
@@ -63,17 +65,31 @@ public class UserBook {
         System.out.println("Delete!");
     }
 
-    public boolean valid_user(String id, String pw)throws SQLException{
+    public User valid_user(String id, String pw)throws SQLException{
         String s1 = "jdbc:mysql://34.72.168.150:3306/UserData?useSSL=false";
 		Connection connection = DriverManager.getConnection(s1, "root", "1234qwer");
 		Statement stmt = connection.createStatement();
-        String sqlStatement = "SELECT name FROM users WHERE id = '" + id  + "' AND password = '" + pw  + "'";
+        String sqlStatement = "SELECT * FROM users WHERE id = '" + id  + "' AND password = '" + pw  + "'";
 		ResultSet result = stmt.executeQuery(sqlStatement);
+        System.out.println("ID: " + id + "   pw: " + pw);
         if(result.next()){
-            return true;
+            String usr_id = result.getString(2);
+
+            if(users[0].getId().equals(usr_id)){
+                for(int i = 0; i < nu; i++){
+                    if(users[i].getId().equals(result.getString(2))){
+                        connection.close();
+                        return users[i];
+                    }
+                }
+            }
+            else{
+                System.out.println("NOT EQUAL");
+            }
+
         }
-        else{
-            return false;
-        }
+        connection.close();
+        return null;
+
     }
 }

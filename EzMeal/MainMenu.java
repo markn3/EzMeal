@@ -18,25 +18,28 @@ public class MainMenu extends JFrame {
     JButton saved_button = new JButton("Saved");
     JButton hist_button = new JButton("History");
     JButton signOut_button = new JButton("Sign Out");
+    User usr;
+    Container mainContainer = this.getContentPane();
+    JScrollPane scrollPane;
 
-    MainMenu() throws SQLException {
+
+    MainMenu(User entered_usr) throws SQLException {
         super("Ez-Meal");	// Window Name
         setSize(1080, 720);	// Window Resolution (1024, 768 || 600, 600)
         setResizable(false);	// Not Resize
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
-        
+        this.usr = entered_usr;
+
 
         
 
         // Create action listeners for buttons to register clicks
         search_button.addActionListener(new search_buttonClicked());
         signOut_button.addActionListener(new signout_buttonClicked());
+        saved_button.addActionListener(new saved_clicked());
 
 
-        
-        
-        Container mainContainer = this.getContentPane();
         mainContainer.setLayout(new BorderLayout(8,6));
         mainContainer.setBackground(new Color(20, 26, 39));	// dark grey
         this.getRootPane().setBorder(BorderFactory.createMatteBorder(0, 4, 0, 0, new Color(44, 49, 63)));
@@ -76,6 +79,8 @@ public class MainMenu extends JFrame {
         for(int i = 0; i < buttons.length; i++){
             try {
                 buttons[i] = new RecipeButton(temp.recipe_list[0]);
+                buttons[i].addActionListener(new RecipeListener(temp.recipe_list[0]));
+
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -86,6 +91,7 @@ public class MainMenu extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane(gridPanel);
         scrollPane.setPreferredSize(new Dimension(500,300));
+        //recipeContainer.add(scrollPane);
         ////#endregion
         
 
@@ -99,6 +105,7 @@ public class MainMenu extends JFrame {
         //label.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(20, 26, 39)));
     
         mainContainer.add(scrollPane, BorderLayout.CENTER);
+
         //mainContainer.add(label);
         mainContainer.add(midPanel, BorderLayout.WEST);
         
@@ -139,6 +146,24 @@ public class MainMenu extends JFrame {
             try {
                 dispose();
                 new StartMenu();
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+		}
+	}
+
+    private class saved_clicked implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{			
+			System.out.println("Saved button clicked!");
+            try {
+                remove(scrollPane);
+                JPanel saved = new SearchRecipes(usr, "Saved");
+                mainContainer.add(saved, BorderLayout.CENTER);
+
+
             } catch (SQLException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();

@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.sql.SQLException;
 public class StartMenu
 {
-	UserBook temp = new UserBook();
+	UserBook ub = new UserBook();
 	JFrame menu1 = new JFrame("1st Window");
     JFrame login_menu = new JFrame("Login Window");
     JFrame recipe_main = new JFrame("Recipe Menu");
@@ -20,6 +20,8 @@ public class StartMenu
 
     private JLabel idLabel, pwLabel;
     private JTextField idField, pwField;
+
+
 
 	
 	public StartMenu() throws SQLException
@@ -173,11 +175,11 @@ public class StartMenu
 		{
 			try {
 
-				boolean valid = temp.valid_user(idField.getText(), pwField.getText());
-				if(valid == true){
+				User valid = ub.valid_user(idField.getText(), pwField.getText());
+				if(valid != null){
 					login_menu.dispose();
 					System.out.println("Opening main menu");
-					new MainMenu();
+					new MainMenu(valid);
 				}
 				else{
 					System.out.println("Incorrect credentials");

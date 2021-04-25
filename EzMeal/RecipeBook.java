@@ -30,7 +30,7 @@ public class RecipeBook {
             recipe_list[i] = temp;
             i++;
         }
-
+        nr = i;
         connection.close();
     }
 

@@ -20,6 +20,7 @@ public class User{
         this.usr_ingredients = ing;
     }
 
+
     public String getName(){
         return name;
     }
