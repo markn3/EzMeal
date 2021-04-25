@@ -89,7 +89,6 @@ public class StartMenu
 
 		login_button2.setSize(100, 30);
 		login_button2.setLocation(50, 300);
-		login_button2.addActionListener(new login_button2Clicked());
 		login_menu.add(login_button2);
 
 		Container mainContainer = login_menu.getContentPane();
@@ -173,17 +172,22 @@ public class StartMenu
 		public void actionPerformed(ActionEvent e)
 		{
 			try {
+
 				boolean valid = temp.valid_user(idField.getText(), pwField.getText());
 				if(valid == true){
 					login_menu.dispose();
+					System.out.println("Opening main menu");
 					new MainMenu();
 				}
 				else{
-					System.out.println("Invalid credentials"); // Add pop up error message
+					System.out.println("Incorrect credentials");
 				}
-			} catch (SQLException e1) {
+			}
+			catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+
+
 		}
     }
 

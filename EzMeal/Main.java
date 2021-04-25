@@ -10,9 +10,8 @@ public class Main{
         // Initialize databases
         RecipeBook rb = new RecipeBook();
         UserBook ub = new UserBook();
-        
-        new MainMenu();
 
+        new StartMenu();
         
 	}
 }
