@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class StartMenu
 {
 	UserBook ub = new UserBook();
-	JFrame menu1 = new JFrame("1st Window");
+	JFrame menu1 = new JFrame("Start");
     JFrame login_menu = new JFrame("Login Window");
     JFrame recipe_main = new JFrame("Recipe Menu");
 	JFrame search_menu = new JFrame("Search Recipes");

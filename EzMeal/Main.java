@@ -12,6 +12,5 @@ public class Main{
         UserBook ub = new UserBook();
 
         new StartMenu();
-        
 	}
 }

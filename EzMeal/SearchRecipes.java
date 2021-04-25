@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.awt.*;
 import javax.swing.*;
 
-public class SearchRecipes extends JPanel{
+public class SearchRecipes extends JPanel{ // JFrame
 
     SearchRecipes(User usr,String query) throws SQLException{
         if(query.equals("Saved")){
@@ -41,7 +41,6 @@ public class SearchRecipes extends JPanel{
             JScrollPane scrollPane = new JScrollPane(gridPanel);
             scrollPane.setPreferredSize(new Dimension(500,300));
             add(scrollPane);
-
 
         }
         else if(query.equals("Ingredients")){

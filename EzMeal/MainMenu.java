@@ -70,16 +70,17 @@ public class MainMenu extends JFrame {
         RecipeBook temp = new RecipeBook();
 
         JPanel recipeContainer = new JPanel();
+        //recipeContainer.setSize(1000, 400);
         JPanel gridPanel = new JPanel();    
         gridPanel.setLayout(new GridLayout(0, 3, 5, 5));
         gridPanel.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(20, 26, 39)));
         gridPanel.setBackground(new Color(20, 26, 39));	//dark grey
 
-        JButton [] buttons = new JButton[12];
+        JButton [] buttons = new JButton[temp.nr];
         for(int i = 0; i < buttons.length; i++){
             try {
-                buttons[i] = new RecipeButton(temp.recipe_list[0]);
-                buttons[i].addActionListener(new RecipeListener(temp.recipe_list[0]));
+                buttons[i] = new RecipeButton(temp.recipe_list[i]);
+                buttons[i].addActionListener(new RecipeListener(temp.recipe_list[i]));
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block
@@ -158,16 +159,18 @@ public class MainMenu extends JFrame {
 		public void actionPerformed(ActionEvent e)
 		{			
 			System.out.println("Saved button clicked!");
+            /*
             try {
-                remove(scrollPane);
-                JPanel saved = new SearchRecipes(usr, "Saved");
-                mainContainer.add(saved, BorderLayout.CENTER);
+                //mainContainer.repaint();
+                //JPanel saved = new SearchRecipes(usr, "Saved");
+                //mainContainer.add(saved, BorderLayout.CENTER);
 
 
             } catch (SQLException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
+            */
 		}
 	}
 
