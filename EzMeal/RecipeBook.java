@@ -5,9 +5,9 @@ import java.sql.*;
 
 public class RecipeBook {
     int nr;                                         
-    Recipe [] recipe_list = new Recipe [20];        // assuming 20 is the max number of recipes (for now)
+    Recipe [] recipe_list = new Recipe [20];        
 
-    public RecipeBook()throws SQLException{
+    public RecipeBook()throws SQLException{     // Connect with database and initialize recipes
         String s1 = "jdbc:mysql://34.72.168.150:3306/RecipeData?useSSL=false";
 		Connection connection = DriverManager.getConnection(s1, "root", "1234qwer");
 		Statement stmt = connection.createStatement();
@@ -53,7 +53,6 @@ public class RecipeBook {
             update_string += null_string;
         }
 
-
 		stmt.executeUpdate(update_string + ");");
 		connection.close();
 		System.out.println("Add!");
@@ -71,41 +70,53 @@ public class RecipeBook {
 
     // Returns recipe
     public Recipe [] IngredientMatchRecipes(String [] ingredients){
-        Recipe [] matched_recipes = new Recipe[20];
+        Recipe [] matched_recipes = recipe_list;
         int [] recipe_points = new int[20];
         
         for(int i = 0; i < nr; i++){
-            int points = 0;
+            recipe_points[i] = 0;
 
             int num_recipe_ingredients = recipe_list[i].getNumIngredients();    // length of recipe i;
             String [] temp_recipes = recipe_list[i].getIngredients();           // Ingredients for recipe i;
 
-            for(int j = 0; j < num_recipe_ingredients; j++){
-                for(int k = 0; k <num_recipe_ingredients;k++){
-                    if(temp_recipes[j].equals(ingredients[k])){
-                        points++;
+            for(int j = 0; j < ingredients.length; j++){
+                for(int k = 0; k < num_recipe_ingredients; k++){
+                    if(temp_recipes[k].equals(ingredients[j])){
+                        recipe_points[i]++;
                     }
                 }
             }
-            recipe_points[i] = points;
 
         }
 
         // selection sort 
         for(int l = 0; l < 20; l++){
-            int min_index = l;
+            int greatest = l;
             for(int m = l+1; m < 20; m++){
-                if(recipe_points[m] < recipe_points[min_index]){
-                    min_index = m;
+                if(recipe_points[m] > recipe_points[greatest]){
+                    greatest = m;
                 }
                 // Swap recipes
-                matched_recipes[min_index] = recipe_list[l];
-                matched_recipes[l] = recipe_list[min_index];        
+                // Greater points first
+                Recipe temp_r = matched_recipes[greatest];
+                matched_recipes[greatest] = recipe_list[l];
+                matched_recipes[l] = temp_r;        
 
                 // Swap ints
-                int temp = recipe_points[min_index];
-                recipe_points[min_index] = recipe_points[l];
+                int temp = recipe_points[greatest];
+                recipe_points[greatest] = recipe_points[l];
                 recipe_points[l] = temp;
+            }
+        }
+        for(int remove = 0; remove < matched_recipes.length; remove++){
+            if(recipe_points[remove] == 0){
+                matched_recipes[remove] = null;
+            }
+        }
+
+        for(int yes = 0; yes < matched_recipes.length; yes++){
+            if(matched_recipes[yes] == null){
+                break;
             }
         }
         return matched_recipes;

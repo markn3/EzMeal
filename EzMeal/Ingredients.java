@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Ingredients extends JFrame{
     JButton done = new JButton("Done");
-    JCheckBox cheeseBox = new JCheckBox("Cheese");
     List <String> l;
     JCheckBox [] checklist;
     User usr;
@@ -37,7 +36,6 @@ public class Ingredients extends JFrame{
         topPanel.setLayout(new GridLayout(0, 5, 5, 5));
         topPanel.setSize(600, 300);
 
-        add(cheeseBox);
         for(int i = 0; i < l.size(); i++){
             checklist[i] = new JCheckBox(l.get(i));
             topPanel.add(checklist[i]);

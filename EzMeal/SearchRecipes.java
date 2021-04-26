@@ -9,7 +9,7 @@ public class SearchRecipes extends JFrame{ // JFrame
     JButton backButton = new JButton("Back");
     User usr;
 
-    SearchRecipes(User usr,String query) throws SQLException{
+    SearchRecipes(User usr,String query) throws SQLException, IOException{
         super(query);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
@@ -19,6 +19,7 @@ public class SearchRecipes extends JFrame{ // JFrame
         backButton.addActionListener(new backButton_clicked());
 
         // If the user presses the saved button
+        //#region
         if(query.equals("Saved")){
             setSize(1080, 720);	                                // Window Resolution (1024, 768 || 600, 600)
 
@@ -70,9 +71,44 @@ public class SearchRecipes extends JFrame{ // JFrame
             setVisible(true);
 
         }
+        //#endregion
         // If the user presses the ingredients button
         else if(query.equals("Ingredients")){
+            JPanel container = new JPanel();
+            container.setLayout(new FlowLayout());          
+            container.setSize(500, 500);
+            container.setBackground(Color.BLUE);
 
+            // Panel that will have the saved recipes in a grid
+            JPanel gridPanel = new JPanel();                
+            gridPanel.setLayout(new GridLayout(0, 3, 5, 5));        // (row, col, space, space)
+            gridPanel.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(20, 26, 39)));
+            gridPanel.setBackground(new Color(20, 26, 39));	//dark grey
+
+            RecipeBook temp = new RecipeBook();                     // Make instance of RecipeBook
+
+            Recipe [] Matched = temp.IngredientMatchRecipes(usr.usr_ingredients);
+
+            JButton [] buttons = new JButton[20];
+            for(int i = 0; i < Matched.length; i++){
+                if(Matched[i] == null){
+                    break;
+                }
+
+                buttons[i] = new RecipeButton(Matched[i]); // Custom button
+                buttons[i].addActionListener(new RecipeListener(usr, Matched[i])); // Custom actionlistener
+
+                buttons[i].setPreferredSize(new Dimension(300,200)); // Set size of buttons
+                gridPanel.add(buttons[i]); 
+
+            }
+            JScrollPane scrollPane = new JScrollPane(gridPanel);
+            scrollPane.setPreferredSize(new Dimension(1000,700));
+            container.add(scrollPane);
+            container.add(backButton);
+            add(container);
+            setVisible(true);
+            
         }
 
     }

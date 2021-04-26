@@ -1,11 +1,12 @@
 import java.awt.event.*;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.awt.*;
 import javax.swing.*;
 
 public class SignUpMenu{
     JFrame menu = new JFrame("Sign up");    
-    private JTextField nameField = new JTextField();                // Set JTextFields outside so that it can be reached
+    private JTextField nameField = new JTextField();               
     private JTextField idField = new JTextField();
     private JTextField passwordField = new JTextField();
     private JTextField confirmationField = new JTextField();
@@ -133,7 +134,7 @@ public class SignUpMenu{
             try {
                 UserBook temp = new UserBook();
                 new StartMenu();
-            } catch (SQLException e1) {
+            } catch (SQLException | IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }            

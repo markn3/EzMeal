@@ -31,7 +31,7 @@ public class UserBook {
             }
 
             for(int k = 0; k < num_ingredients; k++){
-                temp_ingredients[k] = result.getString(13+k);
+                temp_ingredients[k] = result.getString(16+k);
             }
 
             users[i] = new User(name, id, pw, num_recipes, num_ingredients, temp_recipes, temp_ingredients);

@@ -16,8 +16,7 @@ public class Recipe {
 
     }
 
-    // setter and getter functions
-
+    //getter functions
     public int getNumIngredients(){
         return num_ingredients;
     }

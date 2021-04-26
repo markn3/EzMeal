@@ -1,4 +1,4 @@
-// CSCI 3326 Project    Members: Mark Navalta, Stephen Pagayon, Enrique Manrique
+// CSCI 3326 Project    Members: Mark Navalta, Stephen Pagayon
 // Main program
 
 import java.io.IOException;

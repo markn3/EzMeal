@@ -1,6 +1,9 @@
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
@@ -19,34 +22,47 @@ public class StartMenu
     private JLabel idLabel, pwLabel;
     private JTextField idField, pwField;
 	
-	public StartMenu() throws SQLException
+	public StartMenu() throws SQLException, IOException
 	{
         // ################### Main menu #######################################
         //#region
         menu1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menu1.setSize(600, 600);
-        menu1.setLayout(null);
+        menu1.setSize(500, 550);
+		menu1.setBackground(new Color(20, 26, 39));
+        menu1.setLayout(new FlowLayout());
+	
+		JLabel pic = new JLabel();
+		pic.setSize(500,450);
+		BufferedImage img = null;
+        img = ImageIO.read(new File("ez-meal.jpg"));
+        Image dimg = img.getScaledInstance(pic.getWidth(), pic.getHeight(),
+        Image.SCALE_SMOOTH);  
+        pic.setIcon(new ImageIcon(dimg));
+
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setSize(500, 100);
+		buttonPanel.setBackground(new Color(37, 42, 52));
 
 		login_button = new JButton("Login");
-		login_button.setSize(100, 30);
-		login_button.setLocation(200, 50);
 		login_button.addActionListener(new login_buttonClicked());
-		menu1.add(login_button);
+		buttonPanel.add(login_button);
 
 		
 		signup_button = new JButton("Sign up");
-		signup_button.setSize(100, 30);
-		signup_button.setLocation(200, 200);
 		signup_button.addActionListener(new signup_buttonClicked());
-		menu1.add(signup_button);
+		buttonPanel.add(signup_button);
 
 		
 		exit_button = new JButton("Exit");
-		exit_button.setSize(100, 30);
-		exit_button.setLocation(200, 350);
 		exit_button.addActionListener(new exit_buttonClicked());
-		menu1.add(exit_button);
+		buttonPanel.add(exit_button);
+
+		menu1.add(pic, BorderLayout.NORTH);
+		menu1.add(buttonPanel, BorderLayout.SOUTH);
         menu1.setVisible(true);
+
+
+
         //#endregion
 
         // ################### Login Menu ######################################

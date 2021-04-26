@@ -79,6 +79,7 @@ public class MainMenu extends JFrame {
         }
 
         // JScrollPane more like JScroll-Pain aha
+        
         JScrollPane scrollPane = new JScrollPane(gridPanel);
         scrollPane.setPreferredSize(new Dimension(500,300));
         //#endregion
@@ -119,12 +120,14 @@ public class MainMenu extends JFrame {
 		public void actionPerformed(ActionEvent e)
 		{			
 			System.out.println("Search button clicked!");
+
             try {
-                new StartMenu();
-            } catch (SQLException e1) {
+                new SearchRecipes(usr, "Ingredients");
+            } catch (SQLException | IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
+
 		}
 	}
 
@@ -136,7 +139,7 @@ public class MainMenu extends JFrame {
             try {
                 dispose();
                 new StartMenu();
-            } catch (SQLException e1) {
+            } catch (SQLException | IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
@@ -151,7 +154,12 @@ public class MainMenu extends JFrame {
             
             try {
                 dispose();
-                new SearchRecipes(usr, "Saved");
+                try {
+                    new SearchRecipes(usr, "Saved");
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
 
             } catch (SQLException e1) {
                 // TODO Auto-generated catch block
