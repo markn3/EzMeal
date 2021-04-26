@@ -31,7 +31,7 @@ public class UserBook {
             }
 
             for(int k = 0; k < num_ingredients; k++){
-                temp_ingredients[k] = result.getString(7+num_recipes);
+                temp_ingredients[k] = result.getString(13+k);
             }
 
             users[i] = new User(name, id, pw, num_recipes, num_ingredients, temp_recipes, temp_ingredients);
@@ -50,7 +50,7 @@ public class UserBook {
         // Build string
         String update_string = ("INSERT INTO users VALUES ('" + name + "','" + id + "','" + pw + "','" + 0 + "','" + 0 +"'");
         
-        for(int i = 0; i < 15; i++){
+        for(int i = 0; i < 35; i++){
             update_string += ", null";
         }
         update_string += ");";
@@ -84,20 +84,17 @@ public class UserBook {
 
         // If user exists
         if(result.next()){
-            String usr_id = result.getString(2);
-
-            if(users[0].getId().equals(usr_id)){        
-                for(int i = 0; i < nu; i++){
-                    if(users[i].getId().equals(result.getString(2))){
-                        connection.close();
-                        return users[i];
-                    }
+            String usr_id = result.getString(2);    
+            for(int i = 0; i < nu; i++){
+                if(users[i].getId().equals(usr_id)){
+                    connection.close();
+                    return users[i];
                 }
             }
-            else{
-                System.out.println("NOT EQUAL");
-            }
-
+            
+        }
+        else{
+            System.out.println("NOT EQUAL");
         }
         connection.close();
         return null;

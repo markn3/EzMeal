@@ -1,5 +1,4 @@
 import java.awt.event.*;
-import java.beans.Visibility;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.awt.*;
@@ -22,7 +21,6 @@ public class SearchRecipes extends JFrame{ // JFrame
         // If the user presses the saved button
         if(query.equals("Saved")){
             setSize(1080, 720);	                                // Window Resolution (1024, 768 || 600, 600)
-
 
             RecipeBook temp = new RecipeBook();                     // Make instance of RecipeBook
             Recipe [] savedRecipesArr = new Recipe [usr.nr];        // Make array to save recipes to
@@ -53,7 +51,7 @@ public class SearchRecipes extends JFrame{ // JFrame
             for(int i = 0; i < buttons.length; i++){
                 try {
                     buttons[i] = new RecipeButton(savedRecipesArr[i]); // Custom button
-                    buttons[i].addActionListener(new RecipeListener(usr, temp.recipe_list[i])); // Custom actionlistener
+                    buttons[i].addActionListener(new RecipeListener(usr, savedRecipesArr[i])); // Custom actionlistener
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -75,30 +73,6 @@ public class SearchRecipes extends JFrame{ // JFrame
         // If the user presses the ingredients button
         else if(query.equals("Ingredients")){
 
-        }
-
-        else{
-            RecipeBook temp = new RecipeBook();
-            JPanel gridPanel = new JPanel();    
-            gridPanel.setLayout(new GridLayout(0, 3, 5, 5));
-            gridPanel.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, new Color(20, 26, 39)));
-            gridPanel.setBackground(new Color(20, 26, 39));	//dark grey
-    
-            JButton [] buttons = new JButton[15];  // CHANGE THIS NUMBER LATER
-            for(int i = 0; i < buttons.length; i++){
-                try {
-                    buttons[i] = new RecipeButton(temp.recipe_list[0]);
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                buttons[i].setPreferredSize(new Dimension(300,200));
-                gridPanel.add(buttons[i]);
-            }
-    
-            JScrollPane scrollPane = new JScrollPane(gridPanel);
-            scrollPane.setPreferredSize(new Dimension(500,300));
-            add(scrollPane);
         }
 
     }

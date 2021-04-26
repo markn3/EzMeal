@@ -41,9 +41,6 @@ public class ShowRecipe extends JFrame{
             add(saveButton);
         }
 
-        saveButton.addActionListener(new saveButton_clicked());
-
-
         JList<String> ing = new JList<String>(r.getIngredients());
 
         JPanel container = new JPanel();

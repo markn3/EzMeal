@@ -102,6 +102,7 @@ public class MainMenu extends JFrame {
         botPanel.add(signOut_button);
 
         // Create action listeners for buttons to register clicks
+        ing_button.addActionListener(new ingredients_buttonClicked());
         search_button.addActionListener(new search_buttonClicked());
         signOut_button.addActionListener(new signout_buttonClicked());
         saved_button.addActionListener(new saved_clicked());
@@ -172,6 +173,23 @@ public class MainMenu extends JFrame {
                 temp = new UserBook();
                 User re_usr = temp.valid_user(usr.getId(), usr.getPw());
                 new MainMenu(re_usr);
+
+
+            } catch (SQLException e1) {
+            }
+            
+		}
+	}
+
+    private class ingredients_buttonClicked implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{			
+			System.out.println("ingredients button clicked!");
+            
+            try {
+                RecipeBook rb = new RecipeBook();
+                new Ingredients(usr, rb.getEveryIngredient());
 
 
             } catch (SQLException e1) {

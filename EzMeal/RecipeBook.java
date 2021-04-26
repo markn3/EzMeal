@@ -1,4 +1,6 @@
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.*;
 
 public class RecipeBook {
@@ -107,5 +109,18 @@ public class RecipeBook {
             }
         }
         return matched_recipes;
+    }
+
+    public List <String> getEveryIngredient(){
+        List<String> all_recipe_ingredients = new ArrayList<String>();
+        for(int i = 0; i < nr; i++){
+            int recipe_ing_num = recipe_list[i].getNumIngredients();
+            for(int j = 0; j < recipe_ing_num; j++){
+                if(!(all_recipe_ingredients.contains(recipe_list[i].getIngredients()[j]))){
+                    all_recipe_ingredients.add(recipe_list[i].getIngredients()[j]);
+                }
+            }
+        }
+        return all_recipe_ingredients;
     }
 }

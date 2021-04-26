@@ -131,6 +131,7 @@ public class SignUpMenu{
 		{			
             menu.dispose();
             try {
+                UserBook temp = new UserBook();
                 new StartMenu();
             } catch (SQLException e1) {
                 // TODO Auto-generated catch block
